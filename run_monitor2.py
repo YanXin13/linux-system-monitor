@@ -132,9 +132,9 @@ def main():
         worksheet.write('D'+str(row), data[3]())
         worksheet.write('E'+str(row), data[4](), per_format)
         worksheet.write('F'+str(row), data[5]())
- 	worksheet.write('G'+str(row), data[6](), per_format)
+        worksheet.write('G'+str(row), data[6](), per_format)
         worksheet.write('H'+str(row), data[7]())
- 	worksheet.write('I'+str(row), data[8](), per_format)
+        worksheet.write('I'+str(row), data[8](), per_format)
         worksheet.write('J'+str(row), data[9]())
         time.sleep(5)
 
@@ -146,7 +146,7 @@ def main():
     gpu_usage_col1 = workbook.add_chart({'type': 'column'})
     gpu_memory_col1 = workbook.add_chart({'type': 'column'})
     gpu_usage_col2 = workbook.add_chart({'type': 'column'})
-    gpu_memory_col2 = workbook.add_chart({'type': 'column'})
+    gpu_memory_col2 = workbook.add_chart({'type': 'column'}) 
     gpu_usage_col3 = workbook.add_chart({'type': 'column'})
     gpu_memory_col3 = workbook.add_chart({'type': 'column'})
 
@@ -167,6 +167,7 @@ def main():
     gpu_memory_col2.add_series({'name': '=Sheet2!$H$1', 'values': '=Sheet2!$H$2:$H$'+str(row)})
     gpu_usage_col3.add_series({'name': '=Sheet2!$I$1', 'values': '=Sheet2!$I$2:$I$'+str(row)})
     gpu_memory_col3.add_series({'name': '=Sheet2!$J$1', 'values': '=Sheet2!$J$2:$J$'+str(row)})
+    
     # 设置图表的风格
     # chart_col.set_style(1)
     # 把图表插入到worksheet以及偏移
