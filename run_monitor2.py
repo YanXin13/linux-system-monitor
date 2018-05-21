@@ -40,25 +40,11 @@ def get_cpu_usage():
 
 def get_gpu_usage1():
     return percent_to_float(os.popen('''
-    nvidia-smi --query-gpu=utilization.gpu --format=csv | awk 'NR==1{printf "%s%s\t\t", $1, $2}'
-    ''').read())
-
-
-def get_gpu_memory1():
-    try:
-        return float(os.popen('''
-        nvidia-smi --query-gpu=memory.used --format=csv | awk 'NR==1{printf "%.2f\t\t", $1/1024}'
-        ''').read())
-    except:
-        return -1
-
-def get_gpu_usage2():
-    return percent_to_float(os.popen('''
     nvidia-smi --query-gpu=utilization.gpu --format=csv | awk 'NR==2{printf "%s%s\t\t", $1, $2}'
     ''').read())
 
 
-def get_gpu_memory2():
+def get_gpu_memory1():
     try:
         return float(os.popen('''
         nvidia-smi --query-gpu=memory.used --format=csv | awk 'NR==2{printf "%.2f\t\t", $1/1024}'
@@ -66,16 +52,30 @@ def get_gpu_memory2():
     except:
         return -1
 
-def get_gpu_usage3():
+def get_gpu_usage2():
     return percent_to_float(os.popen('''
     nvidia-smi --query-gpu=utilization.gpu --format=csv | awk 'NR==3{printf "%s%s\t\t", $1, $2}'
+    ''').read())
+
+
+def get_gpu_memory2():
+    try:
+        return float(os.popen('''
+        nvidia-smi --query-gpu=memory.used --format=csv | awk 'NR==3{printf "%.2f\t\t", $1/1024}'
+        ''').read())
+    except:
+        return -1
+
+def get_gpu_usage3():
+    return percent_to_float(os.popen('''
+    nvidia-smi --query-gpu=utilization.gpu --format=csv | awk 'NR==4{printf "%s%s\t\t", $1, $2}'
     ''').read())
 
 
 def get_gpu_memory3():
     try:
         return float(os.popen('''
-        nvidia-smi --query-gpu=memory.used --format=csv | awk 'NR==3{printf "%.2f\t\t", $1/1024}'
+        nvidia-smi --query-gpu=memory.used --format=csv | awk 'NR==4{printf "%.2f\t\t", $1/1024}'
         ''').read())
     except:
         return -1
@@ -176,10 +176,10 @@ def main():
     resultsheet.insert_chart('A33', system_disk_col, {'x_offset': 25, 'y_offset': 10, 'x_scale': 3})
     resultsheet.insert_chart('A49', gpu_usage_col1, {'x_offset': 25, 'y_offset': 10, 'x_scale': 3})
     resultsheet.insert_chart('A65', gpu_memory_col1, {'x_offset': 25, 'y_offset': 10, 'x_scale': 3})
-    resultsheet.insert_chart('A49', gpu_usage_col2, {'x_offset': 25, 'y_offset': 10, 'x_scale': 3})
-    resultsheet.insert_chart('A65', gpu_memory_col2, {'x_offset': 25, 'y_offset': 10, 'x_scale': 3})
-    resultsheet.insert_chart('A49', gpu_usage_col3, {'x_offset': 25, 'y_offset': 10, 'x_scale': 3})
-    resultsheet.insert_chart('A65', gpu_memory_col3, {'x_offset': 25, 'y_offset': 10, 'x_scale': 3})
+    resultsheet.insert_chart('A81', gpu_usage_col2, {'x_offset': 25, 'y_offset': 10, 'x_scale': 3})
+    resultsheet.insert_chart('A97', gpu_memory_col2, {'x_offset': 25, 'y_offset': 10, 'x_scale': 3})
+    resultsheet.insert_chart('A113', gpu_usage_col3, {'x_offset': 25, 'y_offset': 10, 'x_scale': 3})
+    resultsheet.insert_chart('A129', gpu_memory_col3, {'x_offset': 25, 'y_offset': 10, 'x_scale': 3})
 
     workbook.close()
 
