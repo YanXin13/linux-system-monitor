@@ -4,6 +4,7 @@ import os
 import time
 import datetime
 import xlsxwriter
+import psutil
 from pathlib import Path
 
 
@@ -34,9 +35,8 @@ def get_system_disk():
 
 
 def get_cpu_usage():
-    return percent_to_float(os.popen('''
-    mpstat -P ALL 1 1 | awk 'NR==4' |awk '{printf "%.2f%%\t\t", $5}'
-    ''').read())
+    cpu = psutil.cpu_percent(interval=1)
+    return cpu
 
 def get_gpu_usage1():
     return percent_to_float(os.popen('''
@@ -127,7 +127,7 @@ def main():
         print(data[0]())
         row += 1
         worksheet.write('A'+str(row), data[0]())
-        worksheet.write('B'+str(row), data[1](), per_format)
+        worksheet.write('B'+str(row), data[1]())
         worksheet.write('C'+str(row), data[2]())
         worksheet.write('D'+str(row), data[3]())
         worksheet.write('E'+str(row), data[4](), per_format)
