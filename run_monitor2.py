@@ -35,7 +35,7 @@ def get_system_disk():
 
 def get_cpu_usage():
     return percent_to_float(os.popen('''
-    mpstat -P ALL 1 1 | awk 'NR==4' |awk '{printf "%.2f%%\t\t", $4}'
+    mpstat -P ALL 1 1 | awk 'NR==4' |awk '{printf "%.2f%%\t\t", $5}'
     ''').read())
 
 def get_gpu_usage1():
